@@ -1,0 +1,14 @@
+{% if image is defined and image.endswith("gpu") -%}
+# Advertise the GPUs
+use feature : GPUs
+GPU_DISCOVERY_EXTRA = -extra
+{% endif -%}
+GalaxyTraining = {{ "training" in name }}
+GalaxyGroup = "{{ group }}"
+GalaxyCluster = "denbi"
+GalaxyDockerHack = {{ docker }}
+STARTD_ATTRS = GalaxyTraining, GalaxyGroup, GalaxyCluster, GalaxyDockerHack
+Rank = StringListMember(MY.GalaxyGroup, TARGET.Group)
+BASE_CGROUP = htcondor
+CGROUP_MEMORY_LIMIT_POLICY = hard
+RESERVED_MEMORY = 2048

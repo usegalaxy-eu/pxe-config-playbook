@@ -1,0 +1,24 @@
+---
+- name: Create directories for configuration files
+  file:
+    path: "{{ item.dest | dirname }}"
+    state: directory
+  loop: "{{ config_templates }}"
+
+- name: Deploy configuration templates
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ config_templates }}"
+
+- name: Tar the folder structure
+  community.general.archive:
+    path: /tmp/localhost
+    dest: /tmp/archive.tar.bz2
+    format: bz2
+    owner: "ubuntu"
+    group: "ubuntu"
+    mode: "755"
