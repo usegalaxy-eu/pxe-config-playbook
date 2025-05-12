@@ -1,12 +1,9 @@
-{% if image is defined and image.endswith("gpu") -%}
 # Advertise the GPUs
 use feature : GPUs
 GPU_DISCOVERY_EXTRA = -extra
-{% endif -%}
-GalaxyTraining = {{ "training" in name }}
-GalaxyGroup = "{{ group }}"
+GalaxyGroup = "compute"
 GalaxyCluster = "denbi"
-GalaxyDockerHack = {{ docker }}
+GalaxyDockerHack = "true"
 STARTD_ATTRS = GalaxyTraining, GalaxyGroup, GalaxyCluster, GalaxyDockerHack
 Rank = StringListMember(MY.GalaxyGroup, TARGET.Group)
 BASE_CGROUP = htcondor

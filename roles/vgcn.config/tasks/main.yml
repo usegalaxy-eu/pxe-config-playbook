@@ -16,9 +16,9 @@
 
 - name: Tar the folder structure
   community.general.archive:
-    path: /tmp/localhost
-    dest: /tmp/archive.tar.bz2
-    format: bz2
+    path: "{{ root_directory.path }}"
+    dest: "{{ [root_directory.path, 'archive.tgz'] | path_join }}"
+    format: gz
     owner: "ubuntu"
     group: "ubuntu"
     mode: "755"
