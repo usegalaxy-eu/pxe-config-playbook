@@ -1,14 +1,26 @@
 ---
 - name: Create directories for configuration files
   file:
-    path: "{{ item.dest | dirname }}"
+    path: "{{ [root_directory.path, item.dest] | path_join | dirname }}"
     state: directory
   loop: "{{ config_templates }}"
+
+- name: Clone the https://github.com/usegalaxy-eu/mounts repository
+  git:
+    repo: "https://github.com/usegalaxy-eu/mounts"
+    dest: "/tmp/mounts/"
+    clone: yes
+    update: yes
+
+- name: Include vars of mountpoints.yml into the 'mounts' variable
+  ansible.builtin.include_vars:
+    file: /tmp/mounts/mountpoints.yml
+    name: mounts
 
 - name: Deploy configuration templates
   ansible.builtin.template:
     src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
+    dest: "{{ [root_directory.path, item.dest] | path_join }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
