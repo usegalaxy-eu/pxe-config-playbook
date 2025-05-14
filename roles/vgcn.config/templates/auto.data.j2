@@ -1,0 +1,12 @@
+{% for mounts in mounts.dnb.values() -%}
+{{ mounts.name }}	-{{ mounts.nfs_options | join(',') }}	{{ mounts.export }}
+{% endfor -%}
+{% for mounts in mounts.jwd.values() -%}
+{{ mounts.name }}	-{{ mounts.nfs_options | join(',') }}	{{ mounts.export }}
+{% endfor %}
+{% for mounts in mounts.cache.values() -%}
+{{ mounts.name }}	-{{ mounts.nfs_options | join(',') }}	{{ mounts.export }}
+{% endfor %}
+{% for mounts in mounts.misc.values() -%}
+{{ mounts.name }}	-{{ mounts.nfs_options | join(',') }}	{{ mounts.export }}
+{% endfor %}

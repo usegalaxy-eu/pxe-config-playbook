@@ -1,0 +1,4 @@
+{% for mounts in mounts.tools.values() -%}
+{{ mounts.path }}      -{{ mounts.nfs_options | join(',') }}		{{ mounts.export }}
+{% endfor -%}
+{{ mounts.sync.gxkey.path }}	-{{ mounts.sync.gxkey.nfs_options | join(',') }}	{{ mounts.sync.gxkey.export }}
