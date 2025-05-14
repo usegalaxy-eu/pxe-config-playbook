@@ -1,61 +1,45 @@
 root_directory:
-  path: "/tmp/localhost"
+  path: "/tmp/localhost/etc/"
+
+htcondor_features: GPUs
+gpu_discovery_extra: "-extra"
+galaxy_group: compute
+galaxy_cluster: denbi
+galaxy_docker_hack: "true"
+startd_attrs:
+  - GalaxyTraining
+  - GalaxyGroup
+  - GalaxyCluster
+  - GalaxyDockerHack
+rank: GalaxyGroup
+base_cgroup: htcondor
+memory_limit_policy: hard
+reserved_memory: 2048
 
 config_templates:
-  #- src: "dummy1.j2"
   - src: "99-cloud-init-conf.j2"
-    dest: "/tmp/localhost/etc/condor/config.d/99-cloud-init.conf"
+    dest: "condor/config.d/99-cloud-init.conf"
     owner: root
     group: root
     mode: '644'
-  #- src: "dummy2.j2"
   - src: "output.conf.j2"
-    dest: "/tmp/localhost/etc/telegraf/telegraf.d/output.conf"
+    dest: "telegraf/telegraf.d/output.conf"
     owner: telegraf
     group: telegraf
     mode: '640'
-  #- src: "dummy3.j2"
   - src: "data.autofs.j2"
-    dest: "/tmp/localhost/etc/auto.master.d/data.autofs"
+    dest: "auto.master.d/data.autofs"
     owner: root
     group: root
     mode: '644'
-  - src: "dummy4.j2"
-    dest: "/tmp/localhost/etc/auto.data"
+  - src: auto.data.j2
+    dest: "auto.data"
     owner: root
     group: root
     mode: '644'
-  - src: "dummy5.j2"
-    dest: "/tmp/localhost/etc/auto.usrlocal"
+  - src: auto.usrlocal.j2
+    dest: "auto.usrlocal"
     owner: root
     group: root
     mode: '644'
-
-  # - src: "99-cloud-init.conf"
-  #   dest: " /etc/condor/config.d/99-cloud-init.conf"
-  #   owner: root
-  #   group: root
-  #   mode: '644'
-  # - src: "output.conf.j2"
-  #   dest: "/etc/telegraf/telegraf.d/output.conf"
-  #   owner: telegraf
-  #   group: telegraf
-  #   mode: '640'
-  # - src: "data.autofs.j2"
-  #   dest: /etc/auto.master.d/data.autofs"
-  #   owner: root
-  #   group: root
-  #   mode: '644'
-  # - src: "auto.data.j2"
-  #   dest: "/etc/auto.data"
-  #   owner: root
-  #   group: root
-  #   mode: '644'
-  # - src: "auto.usrlocal.j2"
-  #   dest: "/etc/auto.usrlocal"
-  #   owner: root
-  #   group: root
-  #   mode: '644'
-
-
     
