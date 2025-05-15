@@ -1,6 +1,9 @@
 root_directory:
   path: "/tmp/localhost/etc/"
 
+home_directory:
+  path: "/tmp/localhost/home/centos/.ssh/"
+
 htcondor_features: GPUs
 gpu_discovery_extra: "-extra"
 galaxy_group: compute

@@ -3,7 +3,25 @@
   file:
     path: "{{ [root_directory.path, item.dest] | path_join | dirname }}"
     state: directory
+    mode: "755"
   loop: "{{ config_templates }}"
+
+- name: Create /home/centos/.ssh directory
+  file:
+    path: "{{ home_directory.path }}"
+    state: directory
+    mode: "700"
+
+- name: Create authorized_keys in /home/centos/.ssh
+  file:
+    path: "{{ home_directory.path + 'authorized_keys' }}"
+    state: touch
+    mode: "600"
+
+- name: Copy Pubkey to authorized_keys
+  copy:
+    dest: "/tmp/localhost/home/centos/.ssh/authorized_keys"
+    content: "SSH KEY ABC"
 
 - name: Clone the https://github.com/usegalaxy-eu/mounts repository
   git:
