@@ -1,8 +1,8 @@
 root_directory:
-  path: "/tmp/localhost/etc/"
+  path: "/tmp/localhost/"
 
 home_directory:
-  path: "/tmp/localhost/home/centos/.ssh/"
+  path: "home/centos/"
 
 htcondor_features: GPUs
 gpu_discovery_extra: "-extra"
@@ -21,27 +21,27 @@ reserved_memory: 2048
 
 config_templates:
   - src: "99-cloud-init-conf.j2"
-    dest: "condor/config.d/99-cloud-init.conf"
+    dest: "etc/condor/config.d/99-cloud-init.conf"
     owner: root
     group: root
     mode: '644'
   - src: "output.conf.j2"
-    dest: "telegraf/telegraf.d/output.conf"
+    dest: "etc/telegraf/telegraf.d/output.conf"
     owner: telegraf
     group: telegraf
     mode: '640'
   - src: "data.autofs.j2"
-    dest: "auto.master.d/data.autofs"
+    dest: "etc/auto.master.d/data.autofs"
     owner: root
     group: root
     mode: '644'
   - src: auto.data.j2
-    dest: "auto.data"
+    dest: "etc/auto.data"
     owner: root
     group: root
     mode: '644'
   - src: auto.usrlocal.j2
-    dest: "auto.usrlocal"
+    dest: "etc/auto.usrlocal"
     owner: root
     group: root
     mode: '644'
