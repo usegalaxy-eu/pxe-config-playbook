@@ -12,16 +12,13 @@
     state: directory
     mode: "700"
 
-- name: Create authorized_keys in /home/centos/.ssh
-  file:
-    path: "{{ home_directory.path + 'authorized_keys' }}"
-    state: touch
-    mode: "600"
-
-- name: Copy Pubkey to authorized_keys
+- name: Create and copy Pubkey to authorized_keys
   copy:
     dest: "/tmp/localhost/home/centos/.ssh/authorized_keys"
     content: "SSH KEY ABC"
+    mode: "600"
+    owner: 1000
+    group: 1000
 
 - name: Clone the https://github.com/usegalaxy-eu/mounts repository
   git:
