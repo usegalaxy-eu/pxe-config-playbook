@@ -1,2 +1,5 @@
-[my_hosts]
-localhost ansible_connection=local ansible_user=root
+[localhost]
+127.0.0.1 ansible_connection=local ansible_user=root
+
+[dnbd-server]
+dnbd01.bi.privat ansible_user=root

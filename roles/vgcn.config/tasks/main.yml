@@ -46,6 +46,6 @@
 - name: Tar the folder structure
   community.general.archive:
     path: "{{ root_directory.path }}"
-    dest: "{{ [root_directory.path, 'archive.tgz'] | path_join }}"
+    dest: "{{ [root_directory.path, 'config_bundle.tgz'] | path_join }}"
     format: gz
     mode: "644"
