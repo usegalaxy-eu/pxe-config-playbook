@@ -16,7 +16,7 @@
   tasks:
     - name: Copy tarball to /tmp on remote server
       ansible.builtin.copy:
-        src: "{{ root_directory.path }}config_bundle.tgz"
+        src: "{{ root_directory.path }}config.tgz"
         dest: "{{ dnbd_http_dir }}/config.tgz.r{{ build_number }}"
         owner: apache
         group: apache
