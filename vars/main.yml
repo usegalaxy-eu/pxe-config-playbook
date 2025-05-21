@@ -20,7 +20,7 @@ rank: GalaxyGroup
 base_cgroup: htcondor
 memory_limit_policy: hard
 reserved_memory: 2048
-ssh_authorized_key: false
+ssh_authorized_key: true
 config_templates:
   - src: "99-cloud-init-conf.j2"
     dest: "etc/condor/config.d/99-cloud-init.conf"
