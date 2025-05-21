@@ -13,12 +13,16 @@
   hosts: dnbd-server
   vars_files:
     - vars/main.yml
-
   tasks:
-  - name: Copy tarball to /tmp on remote server
-    ansible.builtin.copy:
-      src: "{{ root_directory.path }}config_bundle.tgz"
-      dest: "/tmp/"
-      owner: centos
-      group: centos
-      mode: '644'
+    - name: Copy tarball to /tmp on remote server
+      ansible.builtin.copy:
+        src: "{{ root_directory.path }}config_bundle.tgz"
+        dest: "{{ dnbd_http_dir }}/config.tgz.r{{ build_number }}"
+        owner: apache
+        group: apache
+        mode: '644'
+    - name: Change symlink
+      ansible.builtin.file:
+        state: link
+        src: "{{ dnbd_http_dir }}/config.tgz.r{{ build_number }}"
+        path: "{{ dnbd_http_dir }}/config.tgz"
