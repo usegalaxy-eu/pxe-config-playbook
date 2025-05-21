@@ -3,7 +3,26 @@
   file:
     path: "{{ [root_directory.path, item.dest] | path_join | dirname }}"
     state: directory
+    mode: "755"
   loop: "{{ config_templates }}"
+
+- name: Create /home/centos/.ssh directory
+  file:
+    path: "{{ root_directory.path }}{{ home_directory.path }}.ssh"
+    state: directory
+    mode: "700"
+    owner: 1000
+    group: 1000
+  when: ssh_authorized_key
+
+- name: Create and copy Pubkey to authorized_keys
+  copy:
+    dest: "{{ root_directory.path }}{{ home_directory.path }}.ssh/authorized_keys"
+    content: "{{ public_key }}"
+    mode: "600"
+    owner: 1000
+    group: 1000
+  when: ssh_authorized_key
 
 - name: Clone the https://github.com/usegalaxy-eu/mounts repository
   git:
@@ -29,6 +48,6 @@
 - name: Tar the folder structure
   community.general.archive:
     path: "{{ root_directory.path }}"
-    dest: "{{ [root_directory.path, 'archive.tgz'] | path_join }}"
+    dest: "{{ [root_directory.path, 'config.tgz'] | path_join }}"
     format: gz
     mode: "644"

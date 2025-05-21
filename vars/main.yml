@@ -1,5 +1,10 @@
 root_directory:
-  path: "/tmp/localhost/etc/"
+  path: "/tmp/localhost/"
+
+home_directory:
+  path: "home/centos/"
+
+public_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDV7gfNbNN5O8vH6/tM/iOFXKBP2YKRHXOmdfV8ogvu9BdVV0IPmDzk2EooVpThDE1VMv1hz3811tvBhHRJ6IgNhVIV/61w/+RazQD/AU27X8bX+Hb9EQ/bP4DW+6ySd/z5vdDLzpH5dbiMhzPEDkXVsylUT+hkQnas6cHspDhHmtKQ5MWOgDe3D/IEudTDJQe8hxxaU4TaZUmFzn7eYp9HvuK8qW0yCy4NWOxJJHA+G5wSCyLuKnaKo4AitUIzSKF1AB94oq7b96KONhPxgRptAk4OYIUTdNFbrI5HDaSNzHLnF5FbjQvG+Eu6m5nY5yvJMogE+jiuWeIXCZTCFljg287FUo0ohmbZpd802L6VXun14VumRC+rRgPrvBALo/CsyCsPIoBSTKhVElxKVOcRjmTLNfrUZM0GQxqJhIvah8BV+JTExkipPwkrKTdMAWIXvCoehxV+WMpBWqtEEzAzEoqJpaiec7HfriwsHTGESZWAPYEbFjzbHXQZtqBkbOvtokPMRmTWfWKxaplCMN6ddJeeY6faorD0w/e6lszWES1Q1ieajiPKDy37UvybKKvPTk4o3MzyzYOS4c8HQj+jnGeR5Q3ETuyz4psLyOfuBtIrfOeuxV42rFDmkYM3IrrRR+F9oklFG6Ig8DVfgQEzSG36NkgvpF4OdFvigYqXvw== cloud@vgcn"
 
 htcondor_features: GPUs
 gpu_discovery_extra: "-extra"
@@ -15,31 +20,31 @@ rank: GalaxyGroup
 base_cgroup: htcondor
 memory_limit_policy: hard
 reserved_memory: 2048
-
+ssh_authorized_key: false
 config_templates:
   - src: "99-cloud-init-conf.j2"
-    dest: "condor/config.d/99-cloud-init.conf"
+    dest: "etc/condor/config.d/99-cloud-init.conf"
     owner: root
     group: root
     mode: '644'
   - src: "output.conf.j2"
-    dest: "telegraf/telegraf.d/output.conf"
+    dest: "etc/telegraf/telegraf.d/output.conf"
     owner: telegraf
     group: telegraf
     mode: '640'
   - src: "data.autofs.j2"
-    dest: "auto.master.d/data.autofs"
+    dest: "etc/auto.master.d/data.autofs"
     owner: root
     group: root
     mode: '644'
   - src: auto.data.j2
-    dest: "auto.data"
+    dest: "etc/auto.data"
     owner: root
     group: root
     mode: '644'
   - src: auto.usrlocal.j2
-    dest: "auto.usrlocal"
+    dest: "etc/auto.usrlocal"
     owner: root
     group: root
     mode: '644'
-    
+
