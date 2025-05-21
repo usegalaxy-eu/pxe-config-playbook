@@ -26,3 +26,6 @@
         state: link
         src: "{{ dnbd_http_dir }}/config.tgz.r{{ build_number }}"
         path: "{{ dnbd_http_dir }}/config.tgz"
+    - name: Fix SELINUX permissions
+      ansible.builtin.command:
+        cmd: /sbin/restorecon -F -R -v /images/netboot/http/
