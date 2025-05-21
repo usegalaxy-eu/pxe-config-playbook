@@ -9,7 +9,7 @@ public_key: |
 
 htcondor_features: GPUs
 gpu_discovery_extra: "-extra"
-galaxy_group: compute
+galaxy_group: training-pxe-test
 galaxy_cluster: denbi
 galaxy_docker_hack: "true"
 startd_attrs:
