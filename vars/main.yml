@@ -1,5 +1,5 @@
 root_directory:
-  path: "{{ playbook_dir }}/localhost"
+  path: "{{ playbook_dir }}/localhost/"
 dnbd_http_dir: "/images/netboot/http/netboot/"
 home_directory:
   path: "home/centos/"
