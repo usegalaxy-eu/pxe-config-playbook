@@ -3,7 +3,6 @@
   hosts: localhost
   vars_files:
     - vars/main.yml
-    - vars/db_credentials.yml
   become: true
   become_user: root
   roles:
