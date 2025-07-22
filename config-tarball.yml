@@ -10,6 +10,8 @@
 
 - name: Copy tar
   hosts: dnbd-server
+  become: true
+  become_user: root
   vars_files:
     - vars/main.yml
   tasks:
@@ -20,11 +22,13 @@
         owner: apache
         group: apache
         mode: '644'
+      notify: Ensure access for apache
     - name: Change symlink
       ansible.builtin.file:
         state: link
         src: "{{ dnbd_http_dir }}/config.tgz.r{{ build_number }}"
         path: "{{ dnbd_http_dir }}/config.tgz"
-    - name: Fix SELINUX permissions
+  handlers:
+    - name: Ensure access for apache
       ansible.builtin.command:
-        cmd: /sbin/restorecon -F -R -v /images/netboot/http/
+        cmd: /sbin/restorecon -F -R -v /netboot/http/
